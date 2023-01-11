@@ -1,11 +1,13 @@
 import Button from "./Button";
 
-const { useState } = require("react");
+const { useState, useCallback } = require("react");
 const { default: ChildComponent } = require("./ChildComponent");
 
 function Homepage() {
     const [counter, setCounter] = useState(0);
     const [childCounter, setChildCounter] = useState(0);
+
+    const memoizedCallback = useCallback(() => handleChildCounterClick(), [childCounter]);
 
     function handleCounterClick() {
         setCounter(counter + 1);
@@ -19,7 +21,7 @@ function Homepage() {
         <div className="h-full flex items-center justify-center flex-col gap-3">
             <h1>Counter: {counter}</h1>
             <Button primary rounded onClick={handleCounterClick}>Increment counter</Button>
-            <ChildComponent onClick={handleChildCounterClick} counter={childCounter} />
+            <ChildComponent onClick={memoizedCallback} counter={childCounter} />
         </div>
     )
 }
