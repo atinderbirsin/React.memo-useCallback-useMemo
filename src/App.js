@@ -2,7 +2,7 @@ import Homepage from "./components/Homepage";
 
 function App() {
   return (
-    <div>
+    <div className="h-screen">
       <Homepage />
     </div>
   );

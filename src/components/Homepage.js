@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 const { useState } = require("react");
 const { default: ChildComponent } = require("./ChildComponent");
 
@@ -9,11 +11,15 @@ function Homepage() {
         setCounter(counter + 1);
     }
 
+    function handleChildCounterClick() {
+        setChildCounter(childCounter + 1);
+    }
+
     return (
-        <div>
+        <div className="h-full flex items-center justify-center flex-col gap-3">
             <h1>Counter: {counter}</h1>
-            <button onClick={handleCounterClick}>Increment counter</button>
-            <ChildComponent counter={childCounter} />
+            <Button primary rounded onClick={handleCounterClick}>Increment counter</Button>
+            <ChildComponent onClick={handleChildCounterClick} counter={childCounter} />
         </div>
     )
 }
